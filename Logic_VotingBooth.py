@@ -3,6 +3,8 @@ import re
 
 def submit(voter_id: str, person_chose: int, radio_answer, id_input, bottom_label):
     """
+    This Function Creates a File and stores Votes
+
     :param voter_id: This is the Voter ID which is an Integer that gets written to the file
     :param person_chose: This is the Choice of president; Joe Biden, Donald Trump, Or no vote if no radio button selected
     :param radio_answer: This resets the Radio Button after a Successful Vote
