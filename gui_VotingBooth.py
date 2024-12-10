@@ -3,6 +3,9 @@ from Logic_VotingBooth import submit
 
 class Gui:
     def __init__(self, window):
+        """
+        :param window: Allows the program to show the GUI on Screen
+        """
         self.window = window
 
         self.frame1 = Frame(self.window)
@@ -32,6 +35,6 @@ class Gui:
     def submit(self):
         voter_id: str = self.id_input.get()
         person_chose: int = self.radio_answer.get()
-
+        #This calls the submit function used in Logic
         submit(voter_id, person_chose, self.radio_answer, self.id_input, self.bottom_label )
 
