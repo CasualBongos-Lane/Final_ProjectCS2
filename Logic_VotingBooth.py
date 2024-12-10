@@ -22,10 +22,11 @@ def submit(voter_id: str, person_chose: int, radio_answer, id_input, bottom_labe
     #This if statement at the top determines who the person voted for so the correct name can be filed
 
     try:
-        int(voter_id) #Raises the ValueError Exception in case of special characters
+        new_value = int(voter_id.strip())#Raises the ValueError Exception in case of special characters
         with open('Counted_Votes.txt', 'r') as read_file:
             for line in read_file:
-                if re.search(f'^{str(voter_id)}, ', line):
+                line.strip()
+                if re.search(f'^{str(new_value)}, ', line):
                     bottom_label.config(text='ALREADY VOTED', font=('Arial', 25), fg='red')
                     # https://www.geeksforgeeks.org/how-to-set-font-for-text-in-tkinter/ link for when I searched up how to change the font and color
                     return
@@ -33,14 +34,15 @@ def submit(voter_id: str, person_chose: int, radio_answer, id_input, bottom_labe
                     #and it skips the rest of the code
 
         with open('Counted_Votes.txt', 'a') as write_file: #If someone has not voted this will append their vote to the text file
-            write_file.write(f'{voter_id}, {president}\n')
+            write_file.write(f'{new_value}, {president}\n')
             radio_answer.set(0)
             id_input.delete(0, 100)
             bottom_label.config(text='SUCCESSFUL VOTE', font=('Arial', 25), fg='green')
 
     except FileNotFoundError: #If the file is not within the program folder it will create one and store the vote
+        new_value = int(voter_id.strip())
         with open('Counted_Votes.txt', 'w') as write_file:
-            write_file.write(f'{voter_id}, {president}\n')
+            write_file.write(f'{new_value}, {president}\n')
             radio_answer.set(0)
             id_input.delete(0, 100)
             bottom_label.config(text='SUCCESSFUL VOTE', font=('Arial', 25), fg='green')
